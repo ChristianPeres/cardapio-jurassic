@@ -25,7 +25,7 @@ export default {
           nome: "Litrao",
           image: litrao,
           address: "teste",
-          services: ["litrão de antartica: 15R$","Laboratório","Atendimentos Ambulatoriais nas Diversas Especialidades","Sala de Vacinas","Serviços de Humanização"],
+          services: [""],
           schedule: 'teste',
           phone: 'teste'
         },
@@ -34,7 +34,7 @@ export default {
           nome: "Litrao",
           image: litrao,
           address: "teste",
-          services: ["Consultas e Exames","Laboratório","Atendimentos Ambulatoriais nas Diversas Especialidades","Sala de Vacinas","Serviços de Humanização"],
+          services: [""],
           schedule: 'teste',
           phone: 'teste'
         },
@@ -43,7 +43,7 @@ export default {
           nome: "Litrao",
           image: litrao,
           address: "teste",
-          services: ["Consultas e Exames","Laboratório","Atendimentos Ambulatoriais nas Diversas Especialidades","Sala de Vacinas","Serviços de Humanização"],
+          services: [""],
           schedule: 'teste',
           phone: 'teste'
         },
@@ -52,7 +52,7 @@ export default {
           nome: "Litrao",
           image: litrao,
           address: "teste",
-          services: ["Consultas e Exames","Laboratório","Atendimentos Ambulatoriais nas Diversas Especialidades","Sala de Vacinas","Serviços de Humanização"],
+          services: [""],
           schedule: 'teste',
           phone: 'teste'
         },
