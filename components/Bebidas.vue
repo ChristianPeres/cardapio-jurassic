@@ -25,7 +25,7 @@ export default {
           nome: "Litrao",
           image: litrao,
           address: "teste",
-          services: [""],
+          services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
           schedule: 'teste',
           phone: 'teste'
         },
@@ -34,7 +34,7 @@ export default {
           nome: "Litrao",
           image: litrao,
           address: "teste",
-          services: [""],
+          services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
           schedule: 'teste',
           phone: 'teste'
         },
@@ -43,7 +43,7 @@ export default {
           nome: "Litrao",
           image: litrao,
           address: "teste",
-          services: [""],
+          services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
           schedule: 'teste',
           phone: 'teste'
         },
@@ -52,7 +52,7 @@ export default {
           nome: "Litrao",
           image: litrao,
           address: "teste",
-          services: [""],
+          services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
           schedule: 'teste',
           phone: 'teste'
         },
