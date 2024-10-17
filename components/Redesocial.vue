@@ -22,7 +22,7 @@ export default {
               
               {
                   icone: icon.icon_insta,
-                  name: '/jurassicrocbar',
+                  name: '/jurassicrockbar',
                   link: 'https://www.instagram.com/jurassicrockbar/'
               }                        
           ]
