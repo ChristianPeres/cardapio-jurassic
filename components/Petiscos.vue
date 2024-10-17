@@ -21,8 +21,8 @@ export default {
     return {
       cards: [
         {
-          title: "Bebidas",
-          nome: "Litrao",
+          title: "Petisco",
+          nome: "Batata",
           image: litrao,
           address: "teste",
           services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
@@ -30,8 +30,8 @@ export default {
           phone: 'teste'
         },
         {
-          title: "Bebidas",
-          nome: "Litrao",
+          title: "Petisco",
+          nome: "Carne",
           image: litrao,
           address: "teste",
           services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
@@ -39,8 +39,8 @@ export default {
           phone: 'teste'
         },
         {
-          title: "Bebidas",
-          nome: "Litrao",
+          title: "Petisco",
+          nome: "Pastel",
           image: litrao,
           address: "teste",
           services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
@@ -48,8 +48,8 @@ export default {
           phone: 'teste'
         },
         {
-          title: "Bebidas",
-          nome: "Litrao",
+          title: "Petisco",
+          nome: "Mixtao",
           image: litrao,
           address: "teste",
           services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
@@ -201,7 +201,7 @@ export default {
                   <button
                     @click="openModal(card)"
                     class="flex px-14 bg-bg-button rounded justify-center py-1 gap-2 items-center font-semibold text-white hover:opacity-85 mb-2 mx-auto">
-                    
+
                     <span v-html="icon_mais(20, '#ffff')"></span>
                     Saiba Mais
                   </button>
