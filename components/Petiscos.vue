@@ -147,7 +147,7 @@ export default {
     <main class="w-full md:w-full py-12 relative flex justify-center">
       <div class="relative w-full overflow-hidden">
         <h1 class="md:text-left text-center text-5xl mb-9 md:text-5xl font-semibold text-bg-custom-green mx-4 md:mx-16 text-shadow-md">
-            Bebidas Jurassic
+            Petiscos Jurassic
         <span class="absolute left-0 w-full h-1 bg-bg-custom-yellow mt-2"></span>
         </h1>
 
@@ -201,7 +201,7 @@ export default {
                   <button
                     @click="openModal(card)"
                     class="flex px-14 bg-bg-button rounded justify-center py-1 gap-2 items-center font-semibold text-white hover:opacity-85 mb-2 mx-auto">
-                  >
+                    
                     <span v-html="icon_mais(20, '#ffff')"></span>
                     Saiba Mais
                   </button>

@@ -36,7 +36,7 @@ export default {
     </div>
       <div>
       <ul class="grid grid-cols-1 text-left gap-x-18 list-disc p-6 text-2xl">
-        <li v-for="(service, index) in card.services" :key="index" class="service-item">
+        <li v-for="(service, index) in card.services" :key="index" class="service-item mb-4">
             {{ service }}
           </li>
       </ul>

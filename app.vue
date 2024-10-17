@@ -17,6 +17,9 @@ import Petiscos from './components/Petiscos.vue';
     <section class="w-full flex justify-center items-center">
       <Petiscos />
     </section>
+    <section class="w-full flex justify-center items-center">
+      <Redesocial />
+    </section>
   </div>
 </div>
 </template>
