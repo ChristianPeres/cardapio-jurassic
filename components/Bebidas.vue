@@ -200,7 +200,7 @@ export default {
                   <p class="mb-4 mt-2 text-lg">Fone: {{ card.phone }}</p>
                   <button
                     @click="openModal(card)"
-                    class="flex px-14 bg-bg-button rounded justify-center py-1 gap-2 items-center font-semibold text-white hover:opacity-85 mb-2 mx-auto">
+                    class="flex px-16 bg-bg-button rounded justify-center py-2 gap-2 items-center font-semibold text-white hover:opacity-85 mb-2 mx-auto">
                   
                     <span v-html="icon_mais(20, '#ffff')"></span>
                     Saiba Mais
