@@ -11,7 +11,6 @@ interface Card {
   image: string;
   address: string;
   schedule: string;
-  phone: string;
   services?: string[];  
 }
 
@@ -26,37 +25,34 @@ export default {
           title: "Bebidas",
           nome: "Litrao",
           image: litrao,
-          address: "teste",
-          services: ["sla,so to deixando isso aq pra n ficar feio no modal", "sla,so to deixando isso aq pra n ficar feio no modal", "sla,so to deixando isso aq pra n ficar feio no modal" ],
-          schedule: 'teste',
-          phone: 'teste'
+          address: "Av. Samaúma, 1181 - Monte das Oliveiras",
+          services: ["Litrão Antartica 15,00R$","Skol 15,00R$","","", ],
+          schedule: '15,00 R$',
+
         },
         {
           title: "Bebidas",
           nome: "600ml",
           image: seiscentos,
-          address: "teste",
+          address: "Av. Samaúma, 1181 - Monte das Oliveiras",
           services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
-          schedule: 'teste',
-          phone: 'teste'
+          schedule: '15,00 R$',
         },
         {
           title: "Bebidas",
           nome: "Long Neck",
           image: longneck,
-          address: "teste",
+          address: "Av. Samaúma, 1181 - Monte das Oliveiras",
           services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
-          schedule: 'teste',
-          phone: 'teste'
+          schedule: '10,00 R$',
         },
         {
           title: "Bebidas",
-          nome: "Litrao",
+          nome: "Drinks",
           image: litrao,
-          address: "teste",
+          address: "Av. Samaúma, 1181 - Monte das Oliveiras",
           services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
-          schedule: 'teste',
-          phone: 'teste'
+          schedule: '13,00 R$',
         },
       ] as Card[],
       currentIndex: 0,
@@ -187,19 +183,18 @@ export default {
                 alt=""
               />
                 <div class="bg-black-800 p-2  text-sm min-h-[300  px] max-h-[350px] overflow-y-auto md:overflow-hidden">
-                  <h3 class="text-xl font-bold text-bg-custom-green ">
+                  <h3 class="text-xl font-bold text-bg-black">
                     {{ card.title }}
                   </h3>
-                  <h4 class="text-3xl font-bold text-bg-custom-green mb-4">
+                  <h4 class="text-3xl font-bold text-bg-black mb-4">
                     {{ card.nome }}
                   </h4>
-                  <p class="text-bg-dark text-base ">{{ card.address }}</p>
-                  <p class="text-lg">
-                  <span class="font-bold">teste:</span>
+                  <p class="text-bg-dark text-base mb-6 ">{{ card.address }}</p>
+                  <p class="text-lg mb-4">
+                  <span class="font-bold">Valor: </span>
                     <br v-if="card.schedule.includes('<br>')" />
                     <span v-html="card.schedule"></span>
                   </p>
-                  <p class="mb-4 mt-2 text-lg">Fone: {{ card.phone }}</p>
                   <button
                     @click="openModal(card)"
                     class="flex px-16 bg-bg-button rounded justify-center py-2 gap-2 items-center font-semibold text-white hover:opacity-85 mb-2 mx-auto">
