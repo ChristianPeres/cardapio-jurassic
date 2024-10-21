@@ -1,6 +1,8 @@
 <script lang="ts">
 import Modal from '@/components/Modal.vue';
 import  litrao from "/bebidas/litrao.png"
+import  longneck from "/bebidas/longneck.jpeg"
+import  seiscentos from "/bebidas/seiscentos.jpeg"
 
 
 interface Card {
@@ -31,8 +33,8 @@ export default {
         },
         {
           title: "Bebidas",
-          nome: "Litrao",
-          image: litrao,
+          nome: "600ml",
+          image: seiscentos,
           address: "teste",
           services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
           schedule: 'teste',
@@ -40,8 +42,8 @@ export default {
         },
         {
           title: "Bebidas",
-          nome: "Litrao",
-          image: litrao,
+          nome: "Long Neck",
+          image: longneck,
           address: "teste",
           services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
           schedule: 'teste',
@@ -180,7 +182,7 @@ export default {
             >
             <div class="p-0 rounded-lg shadow-lg bg-white overflow-hidden">
               <img
-                class="w-full max-w-[500px] h-[300px] object-fill"
+                class="w-full max-w-[500px] h-[350px] object-fill"
                 :src="card.image"
                 alt=""
               />

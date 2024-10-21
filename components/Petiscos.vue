@@ -3,6 +3,7 @@ import Modal from '@/components/Modal.vue';
 import  litrao from "/bebidas/litrao.png"
 
 
+
 interface Card {
   title: string;
   nome: string;
