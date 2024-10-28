@@ -1,8 +1,6 @@
 <script lang="ts">
-import Modal from '@/components/Modal.vue';
-import  litrao from "/bebidas/litrao.png"
-
-
+import Modal from "@/components/Modal.vue";
+import litrao from "/bebidas/litrao.png";
 
 interface Card {
   title: string;
@@ -10,12 +8,13 @@ interface Card {
   image: string;
   address: string;
   schedule: string;
-  services?: string[];  
+  services?: string[];
+  horario: string;
 }
 
 export default {
   components: {
-    Modal
+    Modal,
   },
   data() {
     return {
@@ -25,50 +24,74 @@ export default {
           nome: "Batata",
           image: litrao,
           address: "Av. Samaúma, 1181 - Monte das Oliveiras",
-          services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
-          schedule: '22,00 R$',
-
+          services: [
+            "Porção de batata R$ 22,00",
+            "Porção de batata c/ carne R$ 40,00",
+            "Porção de batata c/ calabres R$ 38,00",
+            "Porção de batata especial R$ 30,00",
+            ],
+          schedule: "R$ 22,00",
+          horario: "Bar aberto das 18h ás 03h",
         },
         {
           title: "Petisco",
           nome: "Carne",
           image: litrao,
           address: "Av. Samaúma, 1181 - Monte das Oliveiras",
-          services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
-          schedule: '40,00 R$',
+          services: [
+            "Porção de carne R$ 40,00",
+            "Porção de carne c/ calabresa R$ 50,00",
+            "Porção de carne c/ batata R$ 40,00",
+          ],
+          schedule: "R$ 40,00",
+          horario: "Bar aberto das 18h ás 03h",
+          
         },
         {
           title: "Petisco",
           nome: "Pastel",
           image: litrao,
           address: "Av. Samaúma, 1181 - Monte das Oliveiras",
-          services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
-          schedule: '18,00 R$',
+          services: [
+            "Porção de pastel 10un carne/queijo R$ 18,00",
+            "Porção de pastel 10un carne R$ 18,00",
+            "Porção de pastel 10un queijo R$ 18,00",
+          ],
+          schedule: "R$ 18,00",
+          horario: "Bar aberto das 18h ás 03h",
         },
         {
           title: "Petisco",
           nome: "Mixtao",
           image: litrao,
           address: "Av. Samaúma, 1181 - Monte das Oliveiras",
-          services: ["sla,so to deixando isso aq pra n ficar feio no modal"],
-          schedule: '30,00 R$',
+          services: [
+            "sla,so to deixando isso aq pra n ficar feio no modal"
+          ],
+          schedule: "R$ 30,00",
+          horario: "Bar aberto das 18h ás 03h",
         },
         {
           title: "Petisco",
           nome: "Calabresa",
           image: litrao,
           address: "Av. Samaúma, 1181 - Monte das Oliveiras",
-          services: ["sla,so to deixando isso aq pra n ficar feio no modal",""],
-          schedule: '75,00 R$',
-        }
+          services: [
+            "sla,so to deixando isso aq pra n ficar feio no modal",
+            "",
+          ],
+          schedule: "R$ 75,00",
+          horario: "Bar aberto das 18h ás 03h",
+        },
       ] as Card[],
-      currentIndex: 0,
-      showModal: false,
-      selectedCard: null as Card | null,
       isMobile: false,
-      startX: 0,
-      endX: 0,
-      
+      currentIndex: 0,
+      isNavigating: false,
+      startX: null,
+      endX: null,
+      isMoving: false,
+      showModal: false,
+      selectedCard: null,
     };
   },
   computed: {
@@ -80,117 +103,153 @@ export default {
     },
     visibleCardsCount() {
       return this.isMobile ? 1 : 3;
-    }
+    },
   },
   methods: {
     handleResize() {
-      this.isMobile = window.matchMedia('(max-width: 640px)').matches;
+      this.isMobile = window.matchMedia("(max-width: 640px)").matches;
     },
+
     nextCard() {
-      if (this.currentIndex < this.maxIndex) {
+      if (this.currentIndex < this.maxIndex && !this.isNavigating) {
+        this.isNavigating = true;
         this.currentIndex += 1;
+        setTimeout(() => {
+          this.isNavigating = false;
+        }, 300);
       }
     },
+
     prevCard() {
-      if (this.currentIndex > 0) {
+      if (this.currentIndex > 0 && !this.isNavigating) {
+        this.isNavigating = true;
         this.currentIndex -= 1;
+        setTimeout(() => {
+          this.isNavigating = false;
+        }, 300);
       }
     },
-    openModal(card: Card) {
-      this.selectedCard = card;
-      this.showModal = true;
+
+    openModal(card, event) {
+      // Só abre o modal se não houver movimento de swipe
+      if (!this.isMoving) {
+        if (event) {
+          event.stopPropagation();
+          event.preventDefault();
+        }
+        this.selectedCard = card;
+        this.showModal = true;
+      }
     },
+
     closeModal() {
       this.showModal = false;
       this.selectedCard = null;
     },
+
     // Eventos de toque
     handleTouchStart(e) {
-      this.startX = e.touches[0].clientX; // Captura a posição inicial do toque
+      this.startX = e.touches[0].clientX;
+      this.isMoving = false; // Reset do estado de movimento
     },
+
     handleTouchMove(e) {
-      this.endX = e.touches[0].clientX; // Atualiza a posição final do toque conforme o usuário move o dedo
+      this.endX = e.touches[0].clientX;
+      this.isMoving = true; // Indica que houve movimento
     },
+
     handleTouchEnd() {
-      const threshold = 50; // Define o limite mínimo para considerar um "deslizar"
-      if (this.startX - this.endX > threshold) {
-        // Se deslizou para a esquerda
-        this.nextCard();
-      } else if (this.endX - this.startX > threshold) {
-        // Se deslizou para a direita
-        this.prevCard();
+      const threshold = 50;
+      if (this.isMoving) {
+        // Só processa o swipe se houve movimento
+        if (this.startX - this.endX > threshold) {
+          this.nextCard();
+        } else if (this.endX - this.startX > threshold) {
+          this.prevCard();
+        }
       }
+      // Reset dos valores
+      this.startX = null;
+      this.endX = null;
+      this.isMoving = false;
     },
   },
+
   mounted() {
     this.handleResize();
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("resize", this.handleResize);
 
-    // Adiciona os eventos de toque no contêiner do carrossel
     const carousel = this.$refs.carousel;
     if (carousel) {
-      carousel.addEventListener('touchstart', this.handleTouchStart);
-      carousel.addEventListener('touchmove', this.handleTouchMove);
-      carousel.addEventListener('touchend', this.handleTouchEnd);
+      carousel.addEventListener("touchstart", this.handleTouchStart);
+      carousel.addEventListener("touchmove", this.handleTouchMove);
+      carousel.addEventListener("touchend", this.handleTouchEnd);
     }
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.handleResize);
 
-    // Remove os eventos de toque
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize);
+
     const carousel = this.$refs.carousel;
     if (carousel) {
-      carousel.removeEventListener('touchstart', this.handleTouchStart);
-      carousel.removeEventListener('touchmove', this.handleTouchMove);
-      carousel.removeEventListener('touchend', this.handleTouchEnd);
+      carousel.removeEventListener("touchstart", this.handleTouchStart);
+      carousel.removeEventListener("touchmove", this.handleTouchMove);
+      carousel.removeEventListener("touchend", this.handleTouchEnd);
     }
-  }
+  },
 };
 </script>
 
 <template>
-    <main class="w-full md:w-full py-12 relative flex justify-center">
-      <div class="relative w-full overflow-hidden">
-        <h1 class="md:text-left text-center text-5xl mb-9 md:text-5xl font-semibold text-bg-custom-green mx-4 md:mx-16 text-shadow-md">
-            Petiscos Jurassic
-        <span class="absolute left-0 w-full h-1 bg-bg-custom-yellow mt-2"></span>
-        </h1>
+  <main class="w-full md:w-full py-12 relative flex justify-center">
+    <div class="relative w-full overflow-hidden">
+      <h1
+        class="md:text-left text-center text-5xl mb-9 md:text-5xl font-semibold text-bg-custom-green mx-4 md:mx-16 text-shadow-md"
+      >
+        Petiscos Jurassic
+        <span
+          class="absolute left-0 w-full h-1 bg-bg-custom-yellow mt-2"
+        ></span>
+      </h1>
 
-        <div ref="carousel" class="flex items-center gap-2">
-          <button
-            @click="prevCard"
-            :disabled="currentIndex === 0"
-            class="z-10 text-5xl text-white rounded-full p-2 hover:bg-gray-200 disabled:opacity-50"
-          > 
-            &lt;
-          </button>
+      <div ref="carousel" class="flex items-center gap-2">
+        <button
+          @click="prevCard"
+          :disabled="currentIndex === 0"
+          class="z-10 text-5xl text-white rounded-full p-2 hover:bg-gray-200 disabled:opacity-50"
+        >
+          &lt;
+        </button>
+        <div class="flex overflow-hidden gap-2">
           <div
-            class="flex overflow-hidden gap-2"
-          >
-          <div
-              class="flex transition-transform duration-500 ease-in-out"
-              :style="{
-              transform: `translateX(-${currentIndex * (isMobile ? 100 : 33)}%)`,
-              width: `calc(${(100 * (isMobile ? 6 : 4)) / (isMobile ? 6 : 3)}%)`
+            class="flex transition-transform duration-500 ease-in-out"
+            :style="{
+              transform: `translateX(-${
+                currentIndex * (isMobile ? 100 : 33)
+              }%)`,
+              width: `calc(${
+                (100 * (isMobile ? 6 : 4)) / (isMobile ? 6 : 3)
+              }%)`,
             }"
-            >
-        <div
-              @click="openModal(card)"
+          >
+            <div
+              @click.stop="openModal(card, $event)"
               v-for="(card, index) in cards"
               :key="index"
               class="w-full md:w-1/3 lg:w-1/3 px-4 flex-shrink-0 mx-2 md:mx-0"
-              :style="{ width: `${cardWidth}%`,
-              margin: `0 auto`
-               }"
+              :style="{ width: `${cardWidth}%`, margin: `0 auto` }"
             >
-            <div class="p-0 rounded-lg shadow-lg bg-white overflow-hidden">
-              <img
-                class="w-full max-w-[500px] h-[350px] object-fill"
-                :src="card.image"
-                alt=""
-              />
-                <div class="bg-black-800 p-2  text-sm min-h-[300  px] max-h-[350px] overflow-y-auto md:overflow-hidden">
-                  <h3 class="text-xl font-bold text-bg-black ">
+              }" >
+              <div class="p-0 rounded-lg shadow-lg bg-white overflow-hidden">
+                <img
+                  class="w-full max-w-[500px] h-[350px] object-fill"
+                  :src="card.image"
+                  alt=""
+                />
+                <div
+                  class="bg-black-800 p-2 text-sm min-h-[300 px] max-h-[350px] overflow-y-auto md:overflow-hidden"
+                >
+                  <h3 class="text-xl font-bold text-bg-black">
                     {{ card.title }}
                   </h3>
                   <h4 class="text-3xl font-bold text-bg-black mb-4">
@@ -198,36 +257,32 @@ export default {
                   </h4>
                   <p class="text-bg-dark text-base mb-6">{{ card.address }}</p>
                   <p class="text-lg mb-4">
-                  <span class="font-bold">Valor:</span>
+                    <span class="font-bold">Valor:</span>
                     <br v-if="card.schedule.includes('<br>')" />
                     <span v-html="card.schedule"></span>
                   </p>
                   <button
                     @click="openModal(card)"
-                    class="flex px-14 bg-bg-button rounded justify-center py-1 gap-2 items-center font-semibold text-white hover:opacity-85 mb-2 mx-auto">
-
+                    class="flex px-14 bg-bg-button rounded justify-center py-2 gap-2 items-center font-semibold text-white hover:opacity-85 mb-2 mx-auto"
+                  >
                     <span v-html="icon_mais(20, '#ffff')"></span>
-                    Saiba Mais
+                    Aperte aqui
                   </button>
                 </div>
               </div>
+            </div>
           </div>
         </div>
-      </div>
-      <button
+        <button
           @click="nextCard"
           :disabled="currentIndex === maxIndex"
-          class=" text-5xl text-white rounded-full p-2 hover:bg-gray-100 disabled:opacity-50"
+          class="text-5xl text-white rounded-full p-2 hover:bg-gray-100 disabled:opacity-50"
         >
           &gt;
         </button>
-                </div>
-        </div>
-    </main>
-    <Modal
-      :card="selectedCard"
-      :show="showModal"
-      @close="closeModal"
-    />
+      </div>
+    </div>
+  </main>
+  <Modal :card="selectedCard" :show="showModal" @close="closeModal" />
 </template>
 
