@@ -78,8 +78,8 @@ export default {
           address: "Av. Samaúma, 1181 - Monte das Oliveiras",
           services: [
             "Porção de Calabresa R$ 30,00",
-            "Porção de Calabresa c/ Carne R$ 30,00",
-            "Porção de Calabresa c/ Batata R$ 30,00",
+            "Porção de Calabresa c/ Carne R$ 50,00",
+            "Porção de Calabresa c/ Batata R$ 22,00",
           ],
           schedule: "R$ 30,00",
           horario: "Bar aberto das 18h ás 03h",
